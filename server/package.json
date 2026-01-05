@@ -3,6 +3,7 @@
     "dependencies": {
         "@prisma/client": "^6.19.1",
         "express": "^5.2.1",
+        "express-handlebars": "^8.0.4",
         "prisma": "^6.19.1"
     },
     "scripts": {
@@ -12,5 +13,5 @@
     "devDependencies": {
         "nodemon": "^3.1.11"
     },
-    "type":"module"
+    "type": "module"
 }
