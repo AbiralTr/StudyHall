@@ -35,9 +35,14 @@ app.get("/", (req, res) => {
 
 app.get("/home", requirePageUser, (req, res) => res.render("home"));
 
-app.get("/register", (req, res) => res.render("register"));
+app.get("/register", (req, res) => {
+  res.render("register", { hideNav: true });
+});
 
-app.get("/login", (req, res) => res.render("login"));
+app.get("/login", (req, res) => {
+  res.render("login", { hideNav: true });
+});
+
 
 
 app.listen(PORT, () => console.log("StudyHall listening on", PORT));
