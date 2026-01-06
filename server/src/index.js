@@ -1,39 +1,40 @@
-import Express from 'express';
+import express from "express";
 import { engine } from "express-handlebars";
 import path from "path";
-import dotenv from 'dotenv';
-import { PrismaClient } from '@prisma/client';
+import cookieParser from "cookie-parser";
+import dotenv from "dotenv";
+
+import authRouter from "./routes/auth.js";
+import userRouter from "./routes/user.js";
+import {requirePageUser} from "./middleware/requirePageUser.js";
 
 dotenv.config();
-const app = Express();
-const prisma = new PrismaClient();
+
+const app = express();
 const PORT = process.env.PORT || 3000;
 
-// View Engine
 app.engine("hbs", engine({ extname: ".hbs" }));
 app.set("view engine", "hbs");
 app.set("views", path.join(process.cwd(), "views"));
 
-// Middleware
-app.use(Express.json());
-app.use(Express.static("public"));
-app.use(Express.urlencoded({ extended: true }));
+app.use(express.static("public"));
+app.use(express.json()); 
+app.use(cookieParser()); 
+
+app.use("/api/auth", authRouter);
+app.use("/api/user", userRouter);
 
 // Routes
-app.get('/', (req, res) => {
-    res.send('Welcome to the StudyHall API, use /home or /login to access the web app.');
-})
-app.get('/home', (req, res) => {
-    res.render('home');
-});
-app.get('/login', (req, res) => {
-    res.render('login');
-});
-app.get('/register', (req, res) => {
-    res.render('register');
+app.get("/", (req, res) => {
+  res.send("Welcome to StudyHall API, please use the /home endpoint to access the web app.");
 });
 
-// Server Start
-app.listen(PORT, () => {
-    console.log(`Studyhall is Listening on http://localhost:${PORT}`);
-});
+
+app.get("/home", requirePageUser, (req, res) => res.render("home"));
+
+app.get("/register", (req, res) => res.render("register"));
+
+app.get("/login", (req, res) => res.render("login"));
+
+
+app.listen(PORT, () => console.log("StudyHall listening on", PORT));

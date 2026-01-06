@@ -1,17 +1,55 @@
 <div class="auth-page">
-  <div class="auth-card card">
+  <div class="auth-card">
     <h1>Register</h1>
 
-    <form id="register">
-      <input name="username" type="text" placeholder="Username" autocomplete="username" required />
-      <input name="email" type="email" placeholder="Email" autocomplete="email" required />
-      <input name="password" type="password" placeholder="Password" autocomplete="new-password" required />
+    <form id="register" autocomplete="on">
+      <input
+        name="username"
+        type="text"
+        placeholder="Username"
+        minlength="3"
+        maxlength="20"
+        pattern="^[a-zA-Z0-9_]+$"
+        autocomplete="username"
+        required
+      />
+
+      <input
+        name="email"
+        type="email"
+        placeholder="Email"
+        autocomplete="email"
+        required
+      />
+
+      <input
+        name="password"
+        type="password"
+        placeholder="Password (8+ characters)"
+        minlength="8"
+        autocomplete="new-password"
+        required
+      />
+
+      <input
+        name="confirmPassword"
+        type="password"
+        placeholder="Re-enter password"
+        minlength="8"
+        autocomplete="new-password"
+        required
+      />
+
       <button type="submit">Create account</button>
     </form>
 
     <p id="msg" class="muted"></p>
-    <p class="muted">Already have an account? <a href="/login">Login</a></p>
+
+    <p class="muted">
+      Already have an account?
+      <a href="/login">Login</a>
+    </p>
   </div>
 </div>
 
-<script src="../public/js/login.js" defer></script>
+<script src="/js/register.js" defer></script>
