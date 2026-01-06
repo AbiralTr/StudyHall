@@ -7,6 +7,8 @@ import dotenv from "dotenv";
 import authRouter from "./routes/auth.js";
 import userRouter from "./routes/user.js";
 import {requirePageUser} from "./middleware/requirePageUser.js";
+import friendsRouter from "./routes/friends.js";
+
 
 dotenv.config();
 
@@ -23,6 +25,7 @@ app.use(cookieParser());
 
 app.use("/api/auth", authRouter);
 app.use("/api/user", userRouter);
+app.use(friendsRouter);
 
 // Routes
 app.get("/", (req, res) => {

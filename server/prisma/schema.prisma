@@ -12,6 +12,37 @@ model User {
   email        String   @unique
   username     String   @unique
   passwordHash String
-  createdAt    DateTime @default(now())
+
+  sentFriendships     Friendship[] @relation("FriendshipRequester")
+
+  receivedFriendships Friendship[] @relation("FriendshipAddressee")
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 }
 
+enum FriendshipStatus {
+  PENDING
+  ACCEPTED
+  DECLINED
+  BLOCKED
+}
+
+model Friendship {
+  id          String           @id @default(uuid())
+
+  requesterId String
+  addresseeId String
+
+  requester   User             @relation("FriendshipRequester", fields: [requesterId], references: [id], onDelete: Cascade)
+  addressee   User             @relation("FriendshipAddressee", fields: [addresseeId], references: [id], onDelete: Cascade)
+
+  status      FriendshipStatus @default(PENDING)
+
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  @@unique([requesterId, addresseeId])
+  @@index([addresseeId, status])
+  @@index([requesterId, status])
+}
