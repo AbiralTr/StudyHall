@@ -207,13 +207,56 @@ body {
   border: 1px solid #e5e7eb;
   border-radius: 14px;
   padding: 18px 18px;
-  box-shadow: 0 10px 24px rgba(0,0,0,0.06);
+  box-shadow: 0 16px 20px rgba(0, 0, 0, 0.417);
 }
 
 .card h2 {
   font-size: 1.15rem;
   margin-bottom: 8px;
   color: #0b0f19;
+}
+
+.chats-card {
+  background: #ffffff;
+  border: 1px solid #e5e7eb;
+  border-radius: 14px;
+  padding: 18px 18px;
+  box-shadow: 0 16px 20px rgba(0, 0, 0, 0.417);
+  width: 430px;
+}
+
+.chats-card h2 {
+  font-size: 1.15rem;
+  margin-bottom: 8px;
+  color: #0b0f19;
+}
+
+.notebook-card {
+  background: #ffffff;
+  border: 1px solid #e5e7eb;
+  border-radius: 14px;
+  padding: 18px 18px;
+  box-shadow: 0 16px 20px rgba(0, 0, 0, 0.417);
+  width: 430px;
+}
+
+.notebook-card h2 {
+  font-size: 1.15rem;
+  margin-bottom: 8px;
+  color: #0b0f19;
+}
+
+.two-up {
+  display: flex;
+  gap: 90px;
+  align-items: flex-start;
+}
+
+.chats-card,
+.notebook-card {
+  transform: none;
+  width: 430px; 
+  min-height:600px;
 }
 
 .subtle {
