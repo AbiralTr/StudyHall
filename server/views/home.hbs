@@ -9,11 +9,14 @@
     <div class="two-up">
       <section class="chats-card">
         <h2>Chats</h2>
-        <ul style="margin-left: 40px;"></ul>
+
         <section class="chats-card-inner">
-          
+          {{#each friendships}}
+            <p>{{this.otherUser.username}}</p>
+          {{/each}}
         </section>
       </section>
+
 
       <section class="notebook-card">
         <h2>Notebooks</h2>

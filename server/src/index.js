@@ -3,6 +3,7 @@ import { engine } from "express-handlebars";
 import path from "path";
 import cookieParser from "cookie-parser";
 import dotenv from "dotenv";
+import { prisma } from "./db.js";
 
 import authRouter from "./routes/auth.js";
 import userRouter from "./routes/user.js";
@@ -32,8 +33,27 @@ app.get("/", (req, res) => {
   res.send("Welcome to StudyHall API, please use the /home endpoint to access the web app.");
 });
 
+app.get("/home", requirePageUser, async (req, res) => { 
+  const meId = req.userId;
+  const users = await prisma.friendship.findMany({
+    where: {
+      status: "ACCEPTED",
+      OR: [{ requesterId: meId }, { addresseeId: meId }],
+    },
+    include: {
+      requester: { select: { id: true, username: true } },
+      addressee: { select: { id: true, username: true } },
+    },
+    orderBy: { updatedAt: "desc" },
+  });
 
-app.get("/home", requirePageUser, (req, res) => res.render("home"));
+  const friendships = users.map(f => ({
+    ...f,
+    otherUser: f.requesterId === meId ? f.addressee : f.requester,
+  }));
+
+  res.render("home", { friendships });
+});
 
 app.get("/register", (req, res) => {
   res.render("register", { hideNav: true });

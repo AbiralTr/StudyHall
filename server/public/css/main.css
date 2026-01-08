@@ -120,6 +120,7 @@ body {
 .app {
   min-height: 100vh;
   background: #ffffff;
+  overflow-y: hidden;
 }
 
 .topbar {
@@ -200,6 +201,7 @@ body {
   padding: 22px 16px 40px;
   display: grid;
   gap: 16px;
+  overflow-x: hidden;
 }
 
 .card {
@@ -223,6 +225,7 @@ body {
   padding: 18px 18px;
   box-shadow: 0 16px 20px rgba(0, 0, 0, 0.417);
   width: 430px;
+  max-height: 300px;
 }
 
 .chats-card h2 {
@@ -256,7 +259,7 @@ body {
 .notebook-card {
   transform: none;
   width: 430px; 
-  min-height:600px;
+  min-height:500px;
 }
 
 .subtle {
@@ -617,4 +620,68 @@ body {
 
 .friends-page .list-row {
   flex: 0 0 auto;
+}
+
+.chats-card p {
+  color: rgb(0, 0, 0);
+  opacity: 1;
+  font-size: 14px;
+  position: static;
+}
+
+html, body {
+  margin: 0;
+  padding: 0;
+}
+
+
+.chats-card {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.chats-card-inner {
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 12px;
+  padding: 12px;
+  background: rgba(255, 255, 255, 0.04);
+
+  min-height: 0;
+
+  max-height: 260px;
+  overflow: auto;
+}
+
+.chats-card-inner p {
+  margin: 0;
+  padding: 10px 12px;
+  border-radius: 10px;
+
+  font-size: 14px;
+  line-height: 1.2;
+  color: #e9e9e9;
+
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.10);
+}
+
+.chats-card-inner p:hover {
+  background: rgba(255, 255, 255, 0.10);
+  border-color: rgba(255, 255, 255, 0.16);
+}
+
+.chats-card-inner::-webkit-scrollbar {
+  width: 10px;
+}
+.chats-card-inner::-webkit-scrollbar-thumb {
+  background: rgba(255,255,255,0.15);
+  border-radius: 999px;
+}
+.chats-card-inner::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.app .chats-card-inner p {
+  color: #0b0f19;
 }
